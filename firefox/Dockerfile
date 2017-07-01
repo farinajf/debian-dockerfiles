@@ -1,19 +1,35 @@
 FROM debian:jessie
 MAINTAINER Fran Fariña <farinajf@gmail.com>
 
-# Execute th RUN instruction
+            #x11-xserver-utils \
+            #xterm \
+
 RUN apt-get update && apt-get clean && \
-    apt-get install -yq --install-recommends x11vnc firefox-esr xvfb &&\
-    mkdir ~/.vnc &&\
-    touch ~/.vnc/passwd
-RUN x11vnc -storepasswd "temporal" ~/.vnc/passwd
+    apt-get install -y --no-install-recommends \
+            xvfb \
+            xauth \
+            x11vnc \
+            x11-utils \
+            tightvncserver \
+            xfonts-base \
+            xfce4 \
+            xfce4-goodies \
+            gnome-icon-theme \
+            firefox-esr && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN sh -c 'echo "firefox" >> ~/.bashrc'
+ADD ./xstartup /
 
-# Expose the network ports on the container on which it will listen at runtime
+RUN mkdir -p /root/.vnc
+
+RUN x11vnc -storepasswd 000000 /root/.vnc/passwd
+RUN \cp -f ./xstartup /root/.vnc/.
+RUN chmod -v 755 /root/.vnc/xstartup
+
 EXPOSE 5901
 
-# Default executable while starting the container
-#CMD ["vncserver", "-fg"]
-CMD ["/usr/bin/x11vnc", "-forever", "-usepw", "-create"]
+WORKDIR /root
+ENV USER root
+
+#CMD ["vncserver"]
 

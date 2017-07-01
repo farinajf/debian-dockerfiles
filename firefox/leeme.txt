@@ -1,0 +1,4 @@
+docker run -d --name display -p 5901:5901 farinajf/firefox
+
+xtightvncviewer `docker inspect --format='{{.NetworkSettings.IPAddress}}' display`::5901
+

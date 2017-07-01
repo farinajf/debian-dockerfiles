@@ -1,23 +1,13 @@
-dockerfiles-debian-firefox
+dockerfiles-debian-nginx
 ========================
 
-Debian with firefox
-
-To build:
-
-Copy the sources down -
-
-    # docker build --rm -t <username>/firefox
+Debian with vncserver
 
 To run:
 
-    # docker run -d  -p 5901:5901 <username>/firefox
-    # docker run -it -p 5901:5901 <username>/firefox
+   #docker run -d --name display -p 5901:5901 farinajf/firefox
 
 To test:
 
-    # docker inspect --format='{{.NetworkSettings.IPAddress}}' $ID
-    ip
-
-    # vnc://ip:5901
+    # xtightvncviewer `docker inspect --format='{{.NetworkSettings.IPAddress}}' display`::5901
 
