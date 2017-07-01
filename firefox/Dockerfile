@@ -1,7 +1,6 @@
 FROM debian:jessie
 MAINTAINER Fran Fariña <farinajf@gmail.com>
 
-            #x11-xserver-utils \
             #xterm \
 
 RUN apt-get update && apt-get clean && \
@@ -10,6 +9,7 @@ RUN apt-get update && apt-get clean && \
             xauth \
             x11vnc \
             x11-utils \
+            x11-xserver-utils \
             tightvncserver \
             xfonts-base \
             xfce4 \
@@ -25,6 +25,9 @@ RUN mkdir -p /root/.vnc
 RUN x11vnc -storepasswd 000000 /root/.vnc/passwd
 RUN \cp -f ./xstartup /root/.vnc/.
 RUN chmod -v 755 /root/.vnc/xstartup
+
+RUN echo '$geometry="1280x1024";' >> /root/.vncrc
+RUN echo '$depth="24";' >> /root/.vncrc
 
 EXPOSE 5901
 
