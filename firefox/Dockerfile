@@ -26,7 +26,7 @@ RUN x11vnc -storepasswd 000000 /root/.vnc/passwd
 RUN \cp -f ./xstartup /root/.vnc/.
 RUN chmod -v 755 /root/.vnc/xstartup
 
-RUN echo '$geometry="1280x1024";' >> /root/.vncrc
+RUN echo '$geometry="1024x768";' >> /root/.vncrc
 RUN echo '$depth="24";' >> /root/.vncrc
 
 EXPOSE 5901
