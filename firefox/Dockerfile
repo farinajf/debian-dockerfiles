@@ -1,8 +1,6 @@
 FROM debian:jessie
 MAINTAINER Fran Fariña <farinajf@gmail.com>
 
-            #xterm \
-
 RUN apt-get update && apt-get clean && \
     apt-get install -y --no-install-recommends \
             xvfb \
