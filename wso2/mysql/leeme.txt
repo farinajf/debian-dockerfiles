@@ -1,0 +1,5 @@
+docker build --rm -t wso2mysql .
+docker run -d --name m1 wso2mysql
+
+docker run -it --rm --link m1:server wso2mysql sh -c 'exec mysql -h"$SERVER_PORT_3306_TCP_ADDR" -P"$SERVER_PORT_3306_TCP_PORT" -uroot -p"$SERVER_ENV_MYSQL_ROOT_PASSWORD"'
+
