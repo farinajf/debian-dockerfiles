@@ -1,4 +1,0 @@
-docker run -d --name display -e VNC_PASSWORD=newPW -e XFB_SCREEN=1280x800x24 -e XFB_SCREEN_DPI=150 -p 5900:5900 farinajf/x11
-
-gvncviewer `docker inspect --format='{{.NetworkSettings.IPAddress}}' display`:0.0
-
